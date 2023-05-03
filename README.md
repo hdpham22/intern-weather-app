@@ -1,27 +1,37 @@
-# InternWeatherApp
+# Intern Weather App
+We need the ability to see the current weather for any given city. 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.
+### Task
+This page should let me enter in a city or zip code into an input field. After clicking a "get weather" button, I should should the current information displayed on the page:
+* Selected city
+* Current weather condition
+* Weather condition icon
+* Temperature
+* Last updated date
 
-## Development server
+Weather data will be retrieved from https://www.weatherapi.com/. The api url and api key are provided within the code.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Bonus:
+* Show any loading indicator while fetching the weather data (e.g. “Loading…”)
+* If no weather data is returned from the api call, show a default message
+* If the weather api returns an error, show an error message
 
-## Code scaffolding
+## System setup (Laptop)
+#### You will need to have Git on your system
+https://git-scm.com/downloads
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+#### Your computer should have Node and NPM installed
+* Macbook recommendation - https://github.com/nvm-sh/nvm
+* Windows recommendation - https://github.com/coreybutler/nvm-windows 
 
-## Build
+#### You will need to have the Angular CLI installed globally on your system
+`npm install -g @angular/cli`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+#### To initialize and run the application
+1. Go to the project folder `cd intern-weather-app`
+2. `npm install`
+3. `ng serve` ( http://localhost:4200 )
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+#### Coding will be done in the following two folders:
+* app/weather/weather.component.ts (typescript/javascript)
+* app/weather/weather.component.html (html)
