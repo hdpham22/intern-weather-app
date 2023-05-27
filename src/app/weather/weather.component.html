@@ -6,7 +6,7 @@
   <p>Current weather for {{location}}</p>
 
   <!-- Loading -->
-  <div *ngIf="load">Loading...</div>
+  <div *ngIf="showLoad">Loading...</div>
 
   <!-- Angular's '*ngIf' will show the nested content if the weather variable has data
   If there's no data, it will not show the nested content -->
@@ -20,13 +20,14 @@
   </div>
 
   <!-- If API does not return any data -->
-  <ng-template #elseBlock>
-    <p>No weather data found</p>
+  <ng-template #elseBlock> <!-- Does this work? How can I test this? -->>
+    <p>No weather data found</p> 
   </ng-template>
 
   <!-- Will show error message if error is thrown -->
-  <div *ngIf="problem">
+  <div *ngIf="showProblem">
     <p>ERROR: {{code}}</p>
+    <p>{{errMessage}}</p>
   </div>
 
   <!-- Angular form group -->

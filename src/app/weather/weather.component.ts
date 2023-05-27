@@ -28,17 +28,19 @@ export class WeatherComponent implements OnInit {
   location = '';
   weather?: any;
   
-  load?: boolean;
+  showLoad?: boolean;       // boolean value to display the 'loading' screen
   
-  city?: string;
-  temperature?: number;
-  weatherIcon?: string;
-  conditions?: any;
-  lastUpt?: string;
+  city?: string;        // current city of weather
+  temperature?: number; // temperature in farenheit
+  weatherIcon?: string; // Icon illustrative of the current weather
+  conditions?: any;     // current weather conditions
+  lastUpt?: string;     // when the weather was last updated
 
-  //error vars
-  problem?: any;
-  code?: any;
+  //error vars, will be used if http request throws an error
+  showProblem?: boolean;  // is true to display error message if an error occurs, is false otherwise
+  issue?: any;            // http error response
+  code?: any;             // error code
+  errMessage?: string;    // error message
 
   // Lifecycle hook. Called after view has initialized.
   ngOnInit() { }
@@ -47,8 +49,8 @@ export class WeatherComponent implements OnInit {
   getWeather() {
     this.location = this.form?.value.location;
     this.weather = false;
-    this.problem = false;
-    this.load = true;
+    this.showProblem = false;
+    this.showLoad = true;
     // Additional code...
     this.fetchWeather();
   }
@@ -64,9 +66,9 @@ export class WeatherComponent implements OnInit {
     this.http.get(`http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}`).pipe(delay(1000)).subscribe({
       
       next: response => {
-        this.load = false;
+        this.showLoad = false;
         console.log('Get weather response: ', response);
-        this.problem = false;
+        this.showProblem = false;
         this.weather = response;
         // Additional code...
         this.city = this.weather.location.name;
@@ -76,11 +78,13 @@ export class WeatherComponent implements OnInit {
         this.lastUpt = this.weather.current.last_updated;
       },
       error: err => {
-        this.load = false;
+        this.showLoad = false;
+        this.showProblem = true;
         console.error('Get weather error: ', err);
         this.weather = false;
-        this.problem = err;
-        this.code = this.problem.status;
+        this.issue = err;
+        this.code = this.issue.status;
+        this.errMessage = this.issue.error.error.message;
       }
     });
   }
